@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Weather Attempt</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+  
+<body>
+
+<div id="id01"></div>
+
+<script>
+var xmlhttp = new XMLHttpRequest();
+var url = "weather.txt";
+
+xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        var myArr = JSON.parse(xmlhttp.responseText);
+        myFunction(myArr);
+    }
+};
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
+
+function myFunction(arr) {
+	var out = "<h1>Weather</h1>";
+	var i;
+	for(i = 0; i < arr.lenght; i++) {
+		
+		out += arr[i].date 
+		out += arr[i].temperature 
+		out += arr[i].precipitation
+		out += arr[i].clouds 
+		
+		if (arr[i].temperature > 79 && arr[i].precipitation == 0 && arr[i].clouds == 0) {
+		out += "<img src= 'clear.png'>" } 
+		
+			else if (arr[i].temperature > 75 && arr[i].precipitation == 0 && arr[i].clouds == 50)
+		{out += "<img src= 'mostlysunny.png'>" }
+		
+		else if (arr[i].temperature > 70 && arr[i].precipitation > 79  && arr[i].clouds == 100)
+		{out += "<img src= 'thunderstorms01.png'>"}
+		
+		else if (arr[i].temperature < 76 && arr[i].precipitation == 0 && arr[i].clouds == 50)
+		{out += "<img src= 'cloudy.png'>"}	
+		
+	
+	}
+    document.getElementById("id01").innerHTML = out;
+}
+</script>
+
+</body>
+</html>
